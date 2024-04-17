@@ -33,12 +33,11 @@ public class server {
 
 
             while (!clientInput.equals("bye")) {
-                while(!requestedFile){
+                while(!requestedFile && !clientInput.equals("bye")){
                     try {
                         clientInput = in.readUTF();
                         if (clientInput.equals("send")) {
                             System.out.println("Client said:" + clientInput);
-                            out.writeUTF("send request received");
                             requestedFile = true;
                         } else {
                             System.out.println("Client event: " + clientInput);
@@ -49,7 +48,6 @@ public class server {
                     }
                 }
                 // Send desired file to client
-                System.out.println("Sending schedule file1"); //TODO
                 if(requestedFile) {
                     System.out.println("Sending schedule file");
                     out.writeUTF("Sending file");

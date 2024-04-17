@@ -29,7 +29,7 @@ public class client {
             boolean receiveFile = false;
 
             while (!outToServer.equals("bye")) {
-                while(!receiveFile) {
+                while(!receiveFile && !outToServer.equals("bye")) {
                     try {
                         System.out.print("Send server event: ");
                         outToServer = reader.readLine();
@@ -48,6 +48,7 @@ public class client {
                 try {
                     //Write schedule file received from server to cr directory
                     if (receiveFile) {
+                        System.out.println("writing file"); //TODO
                         byte[] fileBytes = new byte[1024];
                         FileOutputStream fileOut = new FileOutputStream("./cr/" + "schedule.txt");
                         BufferedOutputStream fileWriter = new BufferedOutputStream(fileOut);

@@ -5,9 +5,9 @@
 https://docs.google.com/document/d/1p2QKTx_PzvNCmsmBOV5yxO_MmQ7kTc9yoaTJKBgj_G0/edit?usp=sharing
 
 ## Team Members
-- Ashley Maurer
-- Aiden Gaul
-- Caleb Navarro - 9932 9701
+- Aiden Gaul, 9105-9006, aidengaul@ufl.edu
+- Ashley Maurer, 1855-5933, ashley.maurer@ufl.edu;
+- Caleb Navarro, 9932-9701, calebnavarro@ufl.edu 
 
 ## Description
 This program is designed to help users manage their schedules by inputting desired classes, which are then compared against a master schedule to determine a compatible lineup of classes. This solution is implemented using a client-server model that can be run either locally or on the CISE machines.

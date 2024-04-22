@@ -26,19 +26,24 @@ public class client {
             inFromServer = in.readUTF();
             System.out.println("Received from server: " + inFromServer);
             // System.out.println("Enter events to schedule. Enter 'send' to receive a schedule. Enter 'bye' to exit.");
-            System.out.println("Enter events to schedule seperated by a space. Enter 'bye' to exit.");
             boolean receiveFile = false;
 
             while (!outToServer.equals("bye")) {
                 while(!receiveFile && !outToServer.equals("bye")) {
+                    System.out.println("- Enter events to schedule seperated by a space. \n- Enter 'bye' to exit. \n- Enter \"view Schedule\" to view the master Schedule");
                     try {
                         System.out.print("Send server event: ");
                         outToServer = reader.readLine();
                         out.writeUTF(outToServer);
                         out.flush();
-    
+                        
                         inFromServer = in.readUTF();
-                        System.out.println("Received server response: " + inFromServer);
+                        if( inFromServer.equals("Master Schedule:")){
+                            while(!inFromServer.equals("End of Schedule.")){
+                                inFromServer = in.readUTF();
+                                System.out.println(inFromServer);
+                            }
+                        }
                         if (inFromServer.equals("Sending file")) {
                             receiveFile = true;
                         }

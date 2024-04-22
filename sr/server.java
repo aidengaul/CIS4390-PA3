@@ -30,8 +30,12 @@ public class server {
         // Filter the master list to only include events that the client requested
         ArrayList<Event> filteredEvents = new ArrayList<>();
         for (Event event : masterSchedule) {
-            if (requestedClasses.contains(event.name.split(" ")[0])) {
-                filteredEvents.add(event);
+            for (String requestedClass : requestedClasses) {
+                if (event.name.contains(requestedClass)) { // Check if the event name contains the requested class
+                    System.out.println("Adding " + event.name + " to the schedule");
+                    filteredEvents.add(event);
+                    break; // Avoid adding the same event multiple times
+                }
             }
         }
 
@@ -59,12 +63,11 @@ public class server {
     }
     private List<String> readClientInput(String clientInput) {
         List<String> clientInputList = new ArrayList<>();
-        // Assuming clientInput is a comma-separated string
-        String[] inputs = clientInput.split(",");
+        // Assuming clientInput is a space-separated string
+        String[] inputs = clientInput.split(" "); // Changed from comma to space, if needed
         for (String input : inputs) {
-            if (!input.equals("bye")) {
-                clientInputList.add(input);
-                // No need to send acknowledgment here, as it's already received from the client
+            if (!input.trim().isEmpty() && !input.equals("bye")) {
+                clientInputList.add(input.trim());
             }
         }
         return clientInputList;
@@ -86,18 +89,18 @@ public class server {
             out.writeUTF("Hello!");
             
             boolean requestedFile = false;
-            String fileName = "";
-            ArrayList<String> eventNames = new ArrayList<String>();
-            ArrayList<Integer> eventTimes = new ArrayList<Integer>();
-            
+            String fileName = "";          
 
 
             while (!clientInput.equals("bye")) {
                 while(!requestedFile && !clientInput.equals("bye")){
                     try {
                         clientInput = in.readUTF();
-                        clientList = readClientInput(fileName);
+                        System.out.println("Client said: " + clientInput);
+                        clientList = readClientInput(clientInput);
+                        System.out.println("Client list: " + clientList);
                         generateSchedule(clientList);
+                        requestedFile = true;  
                         // if (clientInput.equals("send")) {
                         //     System.out.println("Client said:" + clientInput);
                         //     requestedFile = true;

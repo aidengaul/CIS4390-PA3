@@ -25,7 +25,8 @@ public class client {
             //Server sends "Hello!" to ensure connection is established before client can send a message
             inFromServer = in.readUTF();
             System.out.println("Received from server: " + inFromServer);
-            System.out.println("Enter events to schedule. Enter 'send' to receive a schedule. Enter 'bye' to exit.");
+            // System.out.println("Enter events to schedule. Enter 'send' to receive a schedule. Enter 'bye' to exit.");
+            System.out.println("Enter events to schedule seperated by a space. Enter 'bye' to exit.");
             boolean receiveFile = false;
 
             while (!outToServer.equals("bye")) {
